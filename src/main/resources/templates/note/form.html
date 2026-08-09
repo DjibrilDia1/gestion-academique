@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::content})}">
+<body>
+<div th:fragment="content">
+    <h1 class="mb-4" th:text="${note.id == null ? 'Saisir une Note' : 'Modifier Note'}"></h1>
+    
+    <div class="card shadow">
+        <div class="card-body">
+            <form th:action="@{/notes/enregistrer}" th:object="${note}" method="post">
+                <input type="hidden" th:field="*{id}">
+                
+                <div class="mb-3">
+                    <label for="inscription" class="form-label">Inscription (Étudiant - Cours)</label>
+                    <select class="form-select" id="inscription" th:field="*{inscription}" required>
+                        <option value="">Sélectionner une inscription</option>
+                        <option th:each="insc : ${inscriptions}" th:value="${insc.id}" th:text="${insc.etudiant.prenom + ' ' + insc.etudiant.nom + ' - ' + insc.cours.intitule}"></option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="typeEvaluation" class="form-label">Type d'Évaluation</label>
+                    <input type="text" class="form-control" id="typeEvaluation" th:field="*{typeEvaluation}" placeholder="Ex: Devoir, Examen, TP..." required>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="valeur" class="form-label">Valeur (/20)</label>
+                        <input type="number" step="0.5" min="0" max="20" class="form-control" id="valeur" th:field="*{valeur}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="coefficient" class="form-label">Coefficient</label>
+                        <input type="number" step="0.5" min="1" class="form-control" id="coefficient" th:field="*{coefficient}" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <a th:href="@{/notes}" class="btn btn-secondary">Annuler</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

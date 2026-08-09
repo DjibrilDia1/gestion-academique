@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::content})}">
+<body>
+<div th:fragment="content">
+    <h1 class="mb-4" th:text="${cours.id == null ? 'Nouveau Cours' : 'Modifier Cours'}"></h1>
+    
+    <div class="card shadow">
+        <div class="card-body">
+            <form th:action="@{/cours/enregistrer}" th:object="${cours}" method="post">
+                <input type="hidden" th:field="*{id}">
+                
+                <div class="mb-3">
+                    <label for="code" class="form-label">Code</label>
+                    <input type="text" class="form-control" id="code" th:field="*{code}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="intitule" class="form-label">Intitulé</label>
+                    <input type="text" class="form-control" id="intitule" th:field="*{intitule}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="credits" class="form-label">Crédits</label>
+                    <input type="number" class="form-control" id="credits" th:field="*{credits}" required min="1">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <a th:href="@{/cours}" class="btn btn-secondary">Annuler</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

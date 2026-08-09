@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::content})}">
+<body>
+<div th:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Liste des Étudiants</h1>
+        <a th:href="@{/etudiants/nouveau}" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Nouvel Étudiant</a>
+    </div>
+    
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Matricule</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="etudiant : ${etudiants}">
+                        <td th:text="${etudiant.matricule}"></td>
+                        <td th:text="${etudiant.nom}"></td>
+                        <td th:text="${etudiant.prenom}"></td>
+                        <td th:text="${etudiant.email}"></td>
+                        <td>
+                            <a th:href="@{/etudiants/modifier/{id}(id=${etudiant.id})}" class="btn btn-sm btn-warning">Modifier</a>
+                            <a th:href="@{/etudiants/supprimer/{id}(id=${etudiant.id})}" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr ?')">Supprimer</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(etudiants)}">
+                        <td colspan="5" class="text-center">Aucun étudiant trouvé.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

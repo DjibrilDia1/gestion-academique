@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupe SupdeCo Dakar - Gestion Académique</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Sidebar Section -->
+<div class="app-sidebar" th:if="${#authorization.expression('isAuthenticated()')}">
+    <div class="sidebar-header">
+        <img th:src="@{/images/logo.png}" alt="SupdeCo Dakar" class="sidebar-brand-logo">
+        <span class="sidebar-brand-text">SUP de CO</span>
+    </div>
+
+    <div class="sidebar-nav">
+        <div class="nav-section-title">Navigation</div>
+        
+        <a th:href="@{/tableau-de-bord}" class="sidebar-nav-link" th:classappend="${#httpServletRequest != null and #httpServletRequest.requestURI.startsWith('/tableau-de-bord') ? 'active' : ''}">
+            <i class="bi bi-speedometer2"></i>
+            <span>Tableau de bord</span>
+        </a>
+
+        <div class="nav-section-title">Gestion Académique</div>
+
+        <a th:href="@{/etudiants}" class="sidebar-nav-link" th:classappend="${#httpServletRequest != null and #httpServletRequest.requestURI.startsWith('/etudiants') ? 'active' : ''}">
+            <i class="bi bi-people"></i>
+            <span>Étudiants</span>
+        </a>
+
+        <a th:href="@{/cours}" class="sidebar-nav-link" th:classappend="${#httpServletRequest != null and #httpServletRequest.requestURI.startsWith('/cours') ? 'active' : ''}">
+            <i class="bi bi-journal-bookmark"></i>
+            <span>Cours</span>
+        </a>
+
+        <a th:href="@{/inscriptions}" class="sidebar-nav-link" th:classappend="${#httpServletRequest != null and #httpServletRequest.requestURI.startsWith('/inscriptions') ? 'active' : ''}">
+            <i class="bi bi-card-checklist"></i>
+            <span>Inscriptions</span>
+        </a>
+
+        <a th:href="@{/notes}" class="sidebar-nav-link" th:classappend="${#httpServletRequest != null and #httpServletRequest.requestURI.startsWith('/notes') ? 'active' : ''}">
+            <i class="bi bi-award"></i>
+            <span>Notes & Évaluations</span>
+        </a>
+    </div>
+
+    <!-- User Profile Footer -->
+    <div class="sidebar-footer">
+        <div class="user-profile-badge">
+            <div class="user-avatar" th:text="${#strings.substring(#authentication.name, 0, 1).toUpperCase()}">U</div>
+            <div class="user-info">
+                <div class="user-name" th:text="${#authentication.name}">Utilisateur</div>
+                <div class="user-role" th:text="${#authorization.expression('hasRole(''ADMIN'')') ? 'Administrateur' : 'Enseignant'}">Rôle</div>
+            </div>
+            <form th:action="@{/deconnexion}" method="post" style="margin:0;">
+                <button type="submit" class="btn-logout" title="Déconnexion">
+                    <i class="bi bi-box-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Main Section -->
+<div class="app-main" th:classappend="${!#authorization.expression('isAuthenticated()') ? 'w-100 m-0' : ''}">
+    
+    <!-- Topbar Navigation -->
+    <div class="app-topbar" th:if="${#authorization.expression('isAuthenticated()')}">
+        <div class="topbar-left">
+            <img th:src="@{/images/logo.png}" alt="Logo SupdeCo" class="topbar-logo-img">
+            <div class="breadcrumb-nav">
+                <span>Accueil</span> <i class="bi bi-chevron-right mx-1"></i> <strong>Gestion Académique</strong>
+            </div>
+        </div>
+
+        <div class="topbar-right">
+            <span class="program-badge">LICENCE 3 GÉNIE LOGICIEL</span>
+            <button class="theme-toggle-btn" title="Mode d'affichage">
+                <i class="bi bi-sun-fill"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Dynamic Content -->
+    <div class="app-content">
+        <div th:replace="${content}"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
