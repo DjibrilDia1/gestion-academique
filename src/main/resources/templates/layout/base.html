@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupe SupdeCo Dakar - Gestion Académique</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -12,14 +14,9 @@
 
 <!-- Sidebar Section -->
 <div class="app-sidebar" th:if="${#authorization.expression('isAuthenticated()')}">
-    <div class="sidebar-header">
-        <img th:src="@{/images/logo.png}" alt="SupdeCo Dakar" class="sidebar-brand-logo">
-        <span class="sidebar-brand-text">SUP de CO</span>
-    </div>
-
     <div class="sidebar-nav">
         <div class="nav-section-title">Navigation</div>
-        
+
         <a th:href="@{/tableau-de-bord}" class="sidebar-nav-link" th:classappend="${#httpServletRequest != null and #httpServletRequest.requestURI.startsWith('/tableau-de-bord') ? 'active' : ''}">
             <i class="bi bi-speedometer2"></i>
             <span>Tableau de bord</span>
@@ -67,21 +64,20 @@
 
 <!-- Main Section -->
 <div class="app-main" th:classappend="${!#authorization.expression('isAuthenticated()') ? 'w-100 m-0' : ''}">
-    
+
     <!-- Topbar Navigation -->
     <div class="app-topbar" th:if="${#authorization.expression('isAuthenticated()')}">
         <div class="topbar-left">
             <img th:src="@{/images/logo.png}" alt="Logo SupdeCo" class="topbar-logo-img">
             <div class="breadcrumb-nav">
-                <span>Accueil</span> <i class="bi bi-chevron-right mx-1"></i> <strong>Gestion Académique</strong>
+                <span>Accueil</span>
+                <i class="bi bi-chevron-right mx-1" style="font-size: 0.7rem;"></i>
+                <strong th:text="${pageTitle != null ? pageTitle : 'Gestion Académique'}">Gestion Académique</strong>
             </div>
         </div>
 
         <div class="topbar-right">
             <span class="program-badge">LICENCE 3 GÉNIE LOGICIEL</span>
-            <button class="theme-toggle-btn" title="Mode d'affichage">
-                <i class="bi bi-sun-fill"></i>
-            </button>
         </div>
     </div>
 

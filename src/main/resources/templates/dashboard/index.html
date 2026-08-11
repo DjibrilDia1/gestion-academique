@@ -2,33 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::content})}">
 <body>
 <div th:fragment="content">
-    <h1 class="mb-4">Tableau de bord</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3 shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Étudiants Inscrits</h5>
-                    <p class="card-text display-4" th:text="${totalEtudiants}">0</p>
-                </div>
+
+    <div class="welcome-banner">
+        <div>
+            <h2>Bienvenue sur le portail académique</h2>
+            <p>Gérez les étudiants, cours, inscriptions et évaluations en un seul endroit.</p>
+        </div>
+        <div class="welcome-icon">
+            <i class="bi bi-mortarboard-fill"></i>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card cyan">
+            <div class="stat-icon cyan"><i class="bi bi-people-fill"></i></div>
+            <div>
+                <div class="stat-label">Étudiants Inscrits</div>
+                <div class="stat-number" th:text="${totalEtudiants}">0</div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-success mb-3 shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Cours Disponibles</h5>
-                    <p class="card-text display-4" th:text="${totalCours}">0</p>
-                </div>
+        <div class="stat-card green">
+            <div class="stat-icon green"><i class="bi bi-journal-bookmark-fill"></i></div>
+            <div>
+                <div class="stat-label">Cours Disponibles</div>
+                <div class="stat-number" th:text="${totalCours}">0</div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-warning mb-3 shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Total Inscriptions</h5>
-                    <p class="card-text display-4" th:text="${totalInscriptions}">0</p>
-                </div>
+        <div class="stat-card yellow">
+            <div class="stat-icon yellow"><i class="bi bi-card-checklist"></i></div>
+            <div>
+                <div class="stat-label">Total Inscriptions</div>
+                <div class="stat-number" th:text="${totalInscriptions}">0</div>
             </div>
         </div>
     </div>
+
+    <h3 class="section-title">Accès rapide</h3>
+    <div class="quick-links">
+        <a th:href="@{/etudiants}" class="quick-link">
+            <i class="bi bi-people"></i>
+            <span>Gérer les étudiants</span>
+        </a>
+        <a th:href="@{/cours}" class="quick-link">
+            <i class="bi bi-journal-bookmark"></i>
+            <span>Gérer les cours</span>
+        </a>
+        <a th:href="@{/inscriptions}" class="quick-link">
+            <i class="bi bi-card-checklist"></i>
+            <span>Gérer les inscriptions</span>
+        </a>
+        <a th:href="@{/notes}" class="quick-link">
+            <i class="bi bi-award"></i>
+            <span>Saisir les notes</span>
+        </a>
+    </div>
+
 </div>
 </body>
 </html>

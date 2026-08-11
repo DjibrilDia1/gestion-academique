@@ -2,45 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::content})}">
 <body>
 <div th:fragment="content">
-    <h1 class="mb-4" th:text="${etudiant.id == null ? 'Nouvel Étudiant' : 'Modifier Étudiant'}"></h1>
-    
-    <div class="card shadow">
-        <div class="card-body">
+
+    <div class="page-header">
+        <div>
+            <h1 class="page-title" th:text="${etudiant.id == null ? 'Nouvel Étudiant' : 'Modifier Étudiant'}"></h1>
+            <p class="page-subtitle" th:text="${etudiant.id == null ? 'Remplissez les informations pour créer un étudiant' : 'Modifiez les informations de cet étudiant'}"></p>
+        </div>
+    </div>
+
+    <div class="custom-card form-card">
+        <div class="custom-card-body">
             <form th:action="@{/etudiants/enregistrer}" th:object="${etudiant}" method="post">
                 <input type="hidden" th:field="*{id}">
-                
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="matricule" class="form-label">Matricule</label>
-                        <input type="text" class="form-control" id="matricule" th:field="*{matricule}" required>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="matricule" class="form-label-custom">Matricule</label>
+                        <input type="text" class="form-control form-control-dark" id="matricule" th:field="*{matricule}" placeholder="Ex: ETU2026001" required>
                     </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" th:field="*{email}" required>
-                    </div>
-                </div>
-                
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="prenom" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
+                    <div class="col-md-6 form-group">
+                        <label for="email" class="form-label-custom">Email</label>
+                        <input type="email" class="form-control form-control-dark" id="email" th:field="*{email}" placeholder="etudiant@supdeco.sn" required>
                     </div>
                 </div>
-                
-                <div class="mb-3">
-                    <label for="dateNaissance" class="form-label">Date de Naissance</label>
-                    <input type="date" class="form-control" id="dateNaissance" th:field="*{dateNaissance}">
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="nom" class="form-label-custom">Nom</label>
+                        <input type="text" class="form-control form-control-dark" id="nom" th:field="*{nom}" required>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="prenom" class="form-label-custom">Prénom</label>
+                        <input type="text" class="form-control form-control-dark" id="prenom" th:field="*{prenom}" required>
+                    </div>
                 </div>
-                
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                <a th:href="@{/etudiants}" class="btn btn-secondary">Annuler</a>
+
+                <div class="form-group">
+                    <label for="dateNaissance" class="form-label-custom">Date de Naissance</label>
+                    <input type="date" class="form-control form-control-dark" id="dateNaissance" th:field="*{dateNaissance}">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary-custom">
+                        <i class="bi bi-check-lg"></i> Enregistrer
+                    </button>
+                    <a th:href="@{/etudiants}" class="btn btn-secondary-custom">
+                        <i class="bi bi-arrow-left"></i> Annuler
+                    </a>
+                </div>
             </form>
         </div>
     </div>
+
 </div>
 </body>
 </html>

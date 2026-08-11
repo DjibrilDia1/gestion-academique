@@ -2,33 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::content})}">
 <body>
 <div th:fragment="content">
-    <h1 class="mb-4" th:text="${cours.id == null ? 'Nouveau Cours' : 'Modifier Cours'}"></h1>
-    
-    <div class="card shadow">
-        <div class="card-body">
+
+    <div class="page-header">
+        <div>
+            <h1 class="page-title" th:text="${cours.id == null ? 'Nouveau Cours' : 'Modifier Cours'}"></h1>
+            <p class="page-subtitle" th:text="${cours.id == null ? 'Ajoutez un nouveau cours au catalogue' : 'Modifiez les informations du cours'}"></p>
+        </div>
+    </div>
+
+    <div class="custom-card form-card">
+        <div class="custom-card-body">
             <form th:action="@{/cours/enregistrer}" th:object="${cours}" method="post">
                 <input type="hidden" th:field="*{id}">
-                
-                <div class="mb-3">
-                    <label for="code" class="form-label">Code</label>
-                    <input type="text" class="form-control" id="code" th:field="*{code}" required>
+
+                <div class="form-group">
+                    <label for="code" class="form-label-custom">Code</label>
+                    <input type="text" class="form-control form-control-dark" id="code" th:field="*{code}" placeholder="Ex: GL301" required>
                 </div>
-                
-                <div class="mb-3">
-                    <label for="intitule" class="form-label">Intitulé</label>
-                    <input type="text" class="form-control" id="intitule" th:field="*{intitule}" required>
+
+                <div class="form-group">
+                    <label for="intitule" class="form-label-custom">Intitulé</label>
+                    <input type="text" class="form-control form-control-dark" id="intitule" th:field="*{intitule}" placeholder="Ex: Programmation Java Avancée" required>
                 </div>
-                
-                <div class="mb-3">
-                    <label for="credits" class="form-label">Crédits</label>
-                    <input type="number" class="form-control" id="credits" th:field="*{credits}" required min="1">
+
+                <div class="form-group">
+                    <label for="credits" class="form-label-custom">Crédits</label>
+                    <input type="number" class="form-control form-control-dark" id="credits" th:field="*{credits}" required min="1" placeholder="Ex: 4">
                 </div>
-                
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                <a th:href="@{/cours}" class="btn btn-secondary">Annuler</a>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary-custom">
+                        <i class="bi bi-check-lg"></i> Enregistrer
+                    </button>
+                    <a th:href="@{/cours}" class="btn btn-secondary-custom">
+                        <i class="bi bi-arrow-left"></i> Annuler
+                    </a>
+                </div>
             </form>
         </div>
     </div>
+
 </div>
 </body>
 </html>

@@ -2,39 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::content})}">
 <body>
 <div th:fragment="content">
-    <h1 class="mb-4" th:text="${inscription.id == null ? 'Nouvelle Inscription' : 'Modifier Inscription'}"></h1>
-    
-    <div class="card shadow">
-        <div class="card-body">
+
+    <div class="page-header">
+        <div>
+            <h1 class="page-title" th:text="${inscription.id == null ? 'Nouvelle Inscription' : 'Modifier Inscription'}"></h1>
+            <p class="page-subtitle">Inscrivez un étudiant à un cours</p>
+        </div>
+    </div>
+
+    <div class="custom-card form-card">
+        <div class="custom-card-body">
             <form th:action="@{/inscriptions/enregistrer}" th:object="${inscription}" method="post">
                 <input type="hidden" th:field="*{id}">
-                
-                <div class="mb-3">
-                    <label for="dateInscription" class="form-label">Date d'inscription</label>
-                    <input type="date" class="form-control" id="dateInscription" th:field="*{dateInscription}" required>
+
+                <div class="form-group">
+                    <label for="dateInscription" class="form-label-custom">Date d'inscription</label>
+                    <input type="date" class="form-control form-control-dark" id="dateInscription" th:field="*{dateInscription}" required>
                 </div>
-                
-                <div class="mb-3">
-                    <label for="etudiant" class="form-label">Étudiant</label>
-                    <select class="form-select" id="etudiant" th:field="*{etudiant}" required>
+
+                <div class="form-group">
+                    <label for="etudiant" class="form-label-custom">Étudiant</label>
+                    <select class="form-select form-select-dark" id="etudiant" th:field="*{etudiant}" required>
                         <option value="">Sélectionner un étudiant</option>
                         <option th:each="etu : ${etudiants}" th:value="${etu.id}" th:text="${etu.matricule + ' - ' + etu.prenom + ' ' + etu.nom}"></option>
                     </select>
                 </div>
-                
-                <div class="mb-3">
-                    <label for="cours" class="form-label">Cours</label>
-                    <select class="form-select" id="cours" th:field="*{cours}" required>
+
+                <div class="form-group">
+                    <label for="cours" class="form-label-custom">Cours</label>
+                    <select class="form-select form-select-dark" id="cours" th:field="*{cours}" required>
                         <option value="">Sélectionner un cours</option>
                         <option th:each="c : ${coursList}" th:value="${c.id}" th:text="${c.code + ' - ' + c.intitule}"></option>
                     </select>
                 </div>
-                
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                <a th:href="@{/inscriptions}" class="btn btn-secondary">Annuler</a>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary-custom">
+                        <i class="bi bi-check-lg"></i> Enregistrer
+                    </button>
+                    <a th:href="@{/inscriptions}" class="btn btn-secondary-custom">
+                        <i class="bi bi-arrow-left"></i> Annuler
+                    </a>
+                </div>
             </form>
         </div>
     </div>
+
 </div>
 </body>
 </html>
