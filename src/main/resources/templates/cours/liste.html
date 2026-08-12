@@ -3,24 +3,23 @@
 <body>
 <div th:fragment="content">
 
-    <div class="page-header">
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
         <div>
-            <h1 class="page-title">Liste des Cours</h1>
-            <p class="page-subtitle">Consultez et gérez le catalogue de cours</p>
+            <h1 class="h3 fw-bold mb-1">Liste des Cours</h1><p class="text-app-muted mb-0">Consultez et gérez le catalogue de cours</p>
         </div>
-        <a th:href="@{/cours/nouveau}" class="btn btn-primary-custom">
+        <a th:href="@{/cours/nouveau}" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Nouveau Cours
         </a>
     </div>
 
-    <div class="custom-card">
-        <div class="custom-card-body" th:if="${!#lists.isEmpty(cours)}">
-            <div class="table-count">
+    <div class="card bg-app-panel border-app rounded-4 shadow-app">
+        <div class="card-body p-0" th:if="${!#lists.isEmpty(cours)}">
+            <div class="d-inline-flex align-items-center gap-2 m-4 px-3 py-1 rounded-pill border border-app text-app-muted small">
                 <i class="bi bi-journal-bookmark"></i>
                 <span th:text="${#lists.size(cours)} + ' cours'">0 cours</span>
             </div>
             <div class="table-responsive">
-                <table class="table table-custom">
+                <table class="table align-middle mb-0">
                     <thead>
                         <tr>
                             <th>Code</th>
@@ -31,14 +30,14 @@
                     </thead>
                     <tbody>
                         <tr th:each="c : ${cours}">
-                            <td><span class="badge-matricule" th:text="${c.code}"></span></td>
+                            <td><span class="badge text-bg-primary font-monospace" th:text="${c.code}"></span></td>
                             <td th:text="${c.intitule}"></td>
-                            <td><span class="badge-type" th:text="${c.credits} + ' crédits'"></span></td>
-                            <td class="actions-cell">
-                                <a th:href="@{/cours/modifier/{id}(id=${c.id})}" class="btn-action btn-action-edit">
+                            <td><span class="badge text-bg-secondary" th:text="${c.credits} + ' crédits'"></span></td>
+                            <td class="text-nowrap">
+                                <a th:href="@{/cours/modifier/{id}(id=${c.id})}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-pencil"></i> Modifier
                                 </a>
-                                <a th:href="@{/cours/supprimer/{id}(id=${c.id})}" class="btn-action btn-action-delete" onclick="return confirm('Êtes-vous sûr ?')">
+                                <a th:href="@{/cours/supprimer/{id}(id=${c.id})}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr ?')">
                                     <i class="bi bi-trash"></i> Supprimer
                                 </a>
                             </td>
@@ -47,7 +46,7 @@
                 </table>
             </div>
         </div>
-        <div class="empty-state" th:if="${#lists.isEmpty(cours)}">
+        <div class="text-center text-app-subtle p-5" th:if="${#lists.isEmpty(cours)}">
             <i class="bi bi-journal-bookmark"></i>
             <p>Aucun cours trouvé. Commencez par en ajouter un.</p>
         </div>

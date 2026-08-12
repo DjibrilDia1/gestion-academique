@@ -3,24 +3,23 @@
 <body>
 <div th:fragment="content">
 
-    <div class="page-header">
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
         <div>
-            <h1 class="page-title">Liste des Étudiants</h1>
-            <p class="page-subtitle">Consultez et gérez les étudiants inscrits</p>
+            <h1 class="h3 fw-bold mb-1">Liste des Étudiants</h1><p class="text-app-muted mb-0">Consultez et gérez les étudiants inscrits</p>
         </div>
-        <a th:href="@{/etudiants/nouveau}" class="btn btn-primary-custom">
+        <a th:href="@{/etudiants/nouveau}" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Nouvel Étudiant
         </a>
     </div>
 
-    <div class="custom-card">
-        <div class="custom-card-body" th:if="${!#lists.isEmpty(etudiants)}">
-            <div class="table-count">
+    <div class="card bg-app-panel border-app rounded-4 shadow-app">
+        <div class="card-body p-0" th:if="${!#lists.isEmpty(etudiants)}">
+            <div class="d-inline-flex align-items-center gap-2 m-4 px-3 py-1 rounded-pill border border-app text-app-muted small">
                 <i class="bi bi-people"></i>
                 <span th:text="${#lists.size(etudiants)} + ' étudiant(s)'">0 étudiant(s)</span>
             </div>
             <div class="table-responsive">
-                <table class="table table-custom">
+                <table class="table align-middle mb-0">
                     <thead>
                         <tr>
                             <th>Matricule</th>
@@ -32,15 +31,15 @@
                     </thead>
                     <tbody>
                         <tr th:each="etudiant : ${etudiants}">
-                            <td><span class="badge-matricule" th:text="${etudiant.matricule}"></span></td>
+                            <td><span class="badge text-bg-primary font-monospace" th:text="${etudiant.matricule}"></span></td>
                             <td th:text="${etudiant.nom}"></td>
                             <td th:text="${etudiant.prenom}"></td>
                             <td th:text="${etudiant.email}"></td>
-                            <td class="actions-cell">
-                                <a th:href="@{/etudiants/modifier/{id}(id=${etudiant.id})}" class="btn-action btn-action-edit">
+                            <td class="text-nowrap">
+                                <a th:href="@{/etudiants/modifier/{id}(id=${etudiant.id})}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-pencil"></i> Modifier
                                 </a>
-                                <a th:href="@{/etudiants/supprimer/{id}(id=${etudiant.id})}" class="btn-action btn-action-delete" onclick="return confirm('Êtes-vous sûr ?')">
+                                <a th:href="@{/etudiants/supprimer/{id}(id=${etudiant.id})}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr ?')">
                                     <i class="bi bi-trash"></i> Supprimer
                                 </a>
                             </td>
@@ -49,7 +48,7 @@
                 </table>
             </div>
         </div>
-        <div class="empty-state" th:if="${#lists.isEmpty(etudiants)}">
+        <div class="text-center text-app-subtle p-5" th:if="${#lists.isEmpty(etudiants)}">
             <i class="bi bi-people"></i>
             <p>Aucun étudiant trouvé. Commencez par en ajouter un.</p>
         </div>

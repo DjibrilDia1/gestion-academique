@@ -3,58 +3,86 @@
 <body>
 <div th:fragment="content">
 
-    <div class="welcome-banner">
+    <section class="d-flex align-items-center justify-content-between gap-4 flex-wrap rounded-4 p-4 p-md-5 mb-4 border border-primary border-opacity-25 dashboard-welcome">
         <div>
-            <h2>Bienvenue sur le portail académique</h2>
-            <p>Gérez les étudiants, cours, inscriptions et évaluations en un seul endroit.</p>
+            <h1 class="h2 fw-bold mb-2">Bienvenue sur le portail académique</h1>
+            <p class="text-app-muted mb-0">Gérez les étudiants, cours, inscriptions et évaluations en un seul endroit.</p>
         </div>
-        <div class="welcome-icon">
+        <div class="dashboard-welcome-icon d-flex align-items-center justify-content-center rounded-4 flex-shrink-0">
             <i class="bi bi-mortarboard-fill"></i>
         </div>
+    </section>
+
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-lg-4">
+            <div class="card h-100 bg-app-panel border-app rounded-4 shadow-app transition-app hover-lift dashboard-stat dashboard-stat-cyan">
+                <div class="card-body d-flex align-items-center gap-4 p-4">
+                    <div class="dashboard-stat-icon dashboard-stat-icon-cyan d-flex align-items-center justify-content-center rounded-4 flex-shrink-0"><i class="bi bi-people-fill"></i></div>
+                    <div>
+                        <div class="text-app-muted fw-medium small">Étudiants Inscrits</div>
+                        <div class="display-6 fw-bold lh-1 mt-2" th:text="${totalEtudiants}">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="card h-100 bg-app-panel border-app rounded-4 shadow-app transition-app hover-lift dashboard-stat dashboard-stat-green">
+                <div class="card-body d-flex align-items-center gap-4 p-4">
+                    <div class="dashboard-stat-icon dashboard-stat-icon-green d-flex align-items-center justify-content-center rounded-4 flex-shrink-0"><i class="bi bi-journal-bookmark-fill"></i></div>
+                    <div>
+                        <div class="text-app-muted fw-medium small">Cours Disponibles</div>
+                        <div class="display-6 fw-bold lh-1 mt-2" th:text="${totalCours}">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="card h-100 bg-app-panel border-app rounded-4 shadow-app transition-app hover-lift dashboard-stat dashboard-stat-yellow">
+                <div class="card-body d-flex align-items-center gap-4 p-4">
+                    <div class="dashboard-stat-icon dashboard-stat-icon-yellow d-flex align-items-center justify-content-center rounded-4 flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
+                    <div>
+                        <div class="text-app-muted fw-medium small">Total Inscriptions</div>
+                        <div class="display-6 fw-bold lh-1 mt-2" th:text="${totalInscriptions}">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="stats-grid">
-        <div class="stat-card cyan">
-            <div class="stat-icon cyan"><i class="bi bi-people-fill"></i></div>
-            <div>
-                <div class="stat-label">Étudiants Inscrits</div>
-                <div class="stat-number" th:text="${totalEtudiants}">0</div>
-            </div>
+    <h2 class="h5 fw-semibold mb-3">Accès rapide</h2>
+    <div class="row g-3">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <a th:href="@{/etudiants}" class="card h-100 bg-app-panel border-app rounded-4 text-white text-decoration-none transition-app hover-shift">
+                <span class="card-body d-flex align-items-center gap-3 p-3">
+                    <i class="bi bi-people fs-4 text-info"></i>
+                    <span class="fw-medium">Gérer les étudiants</span>
+                </span>
+            </a>
         </div>
-        <div class="stat-card green">
-            <div class="stat-icon green"><i class="bi bi-journal-bookmark-fill"></i></div>
-            <div>
-                <div class="stat-label">Cours Disponibles</div>
-                <div class="stat-number" th:text="${totalCours}">0</div>
-            </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <a th:href="@{/cours}" class="card h-100 bg-app-panel border-app rounded-4 text-white text-decoration-none transition-app hover-shift">
+                <span class="card-body d-flex align-items-center gap-3 p-3">
+                    <i class="bi bi-journal-bookmark fs-4 text-info"></i>
+                    <span class="fw-medium">Gérer les cours</span>
+                </span>
+            </a>
         </div>
-        <div class="stat-card yellow">
-            <div class="stat-icon yellow"><i class="bi bi-card-checklist"></i></div>
-            <div>
-                <div class="stat-label">Total Inscriptions</div>
-                <div class="stat-number" th:text="${totalInscriptions}">0</div>
-            </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <a th:href="@{/inscriptions}" class="card h-100 bg-app-panel border-app rounded-4 text-white text-decoration-none transition-app hover-shift">
+                <span class="card-body d-flex align-items-center gap-3 p-3">
+                    <i class="bi bi-card-checklist fs-4 text-info"></i>
+                    <span class="fw-medium">Gérer les inscriptions</span>
+                </span>
+            </a>
         </div>
-    </div>
-
-    <h3 class="section-title">Accès rapide</h3>
-    <div class="quick-links">
-        <a th:href="@{/etudiants}" class="quick-link">
-            <i class="bi bi-people"></i>
-            <span>Gérer les étudiants</span>
-        </a>
-        <a th:href="@{/cours}" class="quick-link">
-            <i class="bi bi-journal-bookmark"></i>
-            <span>Gérer les cours</span>
-        </a>
-        <a th:href="@{/inscriptions}" class="quick-link">
-            <i class="bi bi-card-checklist"></i>
-            <span>Gérer les inscriptions</span>
-        </a>
-        <a th:href="@{/notes}" class="quick-link">
-            <i class="bi bi-award"></i>
-            <span>Saisir les notes</span>
-        </a>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <a th:href="@{/notes}" class="card h-100 bg-app-panel border-app rounded-4 text-white text-decoration-none transition-app hover-shift">
+                <span class="card-body d-flex align-items-center gap-3 p-3">
+                    <i class="bi bi-award fs-4 text-info"></i>
+                    <span class="fw-medium">Saisir les notes</span>
+                </span>
+            </a>
+        </div>
     </div>
 
 </div>

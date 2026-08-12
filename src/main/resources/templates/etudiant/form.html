@@ -3,50 +3,49 @@
 <body>
 <div th:fragment="content">
 
-    <div class="page-header">
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
         <div>
-            <h1 class="page-title" th:text="${etudiant.id == null ? 'Nouvel Étudiant' : 'Modifier Étudiant'}"></h1>
-            <p class="page-subtitle" th:text="${etudiant.id == null ? 'Remplissez les informations pour créer un étudiant' : 'Modifiez les informations de cet étudiant'}"></p>
+            <h1 class="h3 fw-bold mb-1" th:text="${etudiant.id == null ? 'Nouvel Étudiant' : 'Modifier Étudiant'}"></h1>
+            <p class="text-app-muted mb-0" th:text="${etudiant.id == null ? 'Remplissez les informations pour créer un étudiant' : 'Modifiez les informations de cet étudiant'}"></p>
         </div>
     </div>
 
-    <div class="custom-card form-card">
-        <div class="custom-card-body">
+    <div class="card bg-app-panel border-app rounded-4 shadow-app"><div class="card-body p-4 p-md-5">
             <form th:action="@{/etudiants/enregistrer}" th:object="${etudiant}" method="post">
                 <input type="hidden" th:field="*{id}">
 
                 <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label for="matricule" class="form-label-custom">Matricule</label>
-                        <input type="text" class="form-control form-control-dark" id="matricule" th:field="*{matricule}" placeholder="Ex: ETU2026001" required>
+                    <div class="col-md-6 mb-3">
+                        <label for="matricule" class="form-label text-app-muted">Matricule</label>
+                        <input type="text" class="form-control" id="matricule" th:field="*{matricule}" placeholder="Ex: ETU2026001" required>
                     </div>
-                    <div class="col-md-6 form-group">
-                        <label for="email" class="form-label-custom">Email</label>
-                        <input type="email" class="form-control form-control-dark" id="email" th:field="*{email}" placeholder="etudiant@supdeco.sn" required>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label text-app-muted">Email</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="etudiant@supdeco.sn" required>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label for="nom" class="form-label-custom">Nom</label>
-                        <input type="text" class="form-control form-control-dark" id="nom" th:field="*{nom}" required>
+                    <div class="col-md-6 mb-3">
+                        <label for="nom" class="form-label text-app-muted">Nom</label>
+                        <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
                     </div>
-                    <div class="col-md-6 form-group">
-                        <label for="prenom" class="form-label-custom">Prénom</label>
-                        <input type="text" class="form-control form-control-dark" id="prenom" th:field="*{prenom}" required>
+                    <div class="col-md-6 mb-3">
+                        <label for="prenom" class="form-label text-app-muted">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="dateNaissance" class="form-label-custom">Date de Naissance</label>
-                    <input type="date" class="form-control form-control-dark" id="dateNaissance" th:field="*{dateNaissance}">
+                <div class="mb-3">
+                    <label for="dateNaissance" class="form-label text-app-muted">Date de Naissance</label>
+                    <input type="date" class="form-control" id="dateNaissance" th:field="*{dateNaissance}">
                 </div>
 
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary-custom">
+                <div class="d-flex gap-2 mt-4 pt-4 border-top border-app">
+                    <button type="submit" class="btn btn-primary">
                         <i class="bi bi-check-lg"></i> Enregistrer
                     </button>
-                    <a th:href="@{/etudiants}" class="btn btn-secondary-custom">
+                    <a th:href="@{/etudiants}" class="btn btn-outline-light">
                         <i class="bi bi-arrow-left"></i> Annuler
                     </a>
                 </div>

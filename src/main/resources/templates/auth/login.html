@@ -12,67 +12,65 @@
 </head>
 <body>
 
-<div class="ent-login-page">
+<main class="min-vh-100 d-flex flex-column align-items-center justify-content-center position-relative p-4" style="background-color: #0a1628">
 
-    <div class="ent-lang-selector">
+    <div class="position-absolute top-0 end-0 m-4 d-inline-flex align-items-center gap-2 border border-white border-opacity-25 rounded-2 px-3 py-2 small">
         <i class="bi bi-globe2"></i>
         <span>Français</span>
         <i class="bi bi-chevron-down" style="font-size: 0.7rem;"></i>
     </div>
 
-    <div class="ent-login-container">
+    <div class="w-100 text-center" style="max-width: 520px">
 
-        <img th:src="@{/images/logo.png}" alt="Groupe SupdeCo Dakar" class="ent-logo">
+        <img th:src="@{/images/logo.png}" alt="Groupe SupdeCo Dakar" class="img-fluid mb-4" style="max-height: 110px">
 
-        <h1 class="ent-title">Gestion Académique</h1>
+        <h1 class="h3 fw-bold mb-4">Gestion Académique</h1>
 
-        <div th:if="${param.error}" class="ent-alert danger">
+        <div th:if="${param.error}" class="alert alert-danger d-flex align-items-center gap-2 text-start">
             <i class="bi bi-exclamation-triangle-fill"></i>
             <span>Identifiants incorrects. Veuillez réessayer.</span>
         </div>
-        <div th:if="${param.logout}" class="ent-alert success">
+        <div th:if="${param.logout}" class="alert alert-success d-flex align-items-center gap-2 text-start">
             <i class="bi bi-check-circle-fill"></i>
             <span>Déconnexion réussie.</span>
         </div>
 
-        <form class="ent-form" th:action="@{/connexion}" method="post">
+        <form class="text-start" th:action="@{/connexion}" method="post">
 
-            <div class="ent-field">
-                <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" placeholder="ex: admin" required autofocus>
+            <div class="mb-3">
+                <label for="username" class="form-label text-app-muted">Nom d'utilisateur</label>
+                <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="ex: admin" required autofocus>
             </div>
 
-            <div class="ent-field ent-field-password">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" placeholder="••••••••" required>
-                <button type="button" class="ent-toggle-password" id="togglePassword" aria-label="Afficher le mot de passe">
+            <div class="mb-3 position-relative">
+                <label for="password" class="form-label text-app-muted">Mot de passe</label>
+                <input type="password" class="form-control form-control-lg pe-5" id="password" name="password" placeholder="••••••••" required>
+                <button type="button" class="btn btn-link text-app-subtle position-absolute end-0 bottom-0 mb-1" id="togglePassword" aria-label="Afficher le mot de passe">
                     <i class="bi bi-eye" id="toggleIcon"></i>
                 </button>
             </div>
 
-            <a href="#" class="ent-forgot-link" onclick="return false;">Mot de passe oublié ?</a>
+            <a href="#" class="d-block text-end text-decoration-none mb-4" onclick="return false;">Mot de passe oublié ?</a>
 
-            <button type="submit" class="ent-btn-connect">Se connecter</button>
+            <button type="submit" class="btn btn-primary btn-lg w-100">Se connecter</button>
 
         </form>
 
-        <hr class="ent-separator">
+        <hr class="border-secondary border-opacity-25 my-4">
 
-        <p class="ent-help-text">
+        <p class="text-white-50 small lh-lg mb-0">
             Si vous ne connaissez pas vos identifiants ou avez perdu votre mot de passe,
             contactez l'administration de l'établissement.
         </p>
 
-        <div class="ent-legal-links">
-            <a href="#" onclick="return false;">Conditions Générales d'Utilisation</a>
-            <span class="sep">|</span>
-            <a href="#" onclick="return false;">Politique de Confidentialité</a>
-            <span class="sep">|</span>
-            <a href="#" onclick="return false;">Mentions Légales</a>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-4 small">
+            <a href="#" class="link-secondary" onclick="return false;">Conditions Générales d'Utilisation</a><span class="text-white-50">|</span>
+            <a href="#" class="link-secondary" onclick="return false;">Politique de Confidentialité</a><span class="text-white-50">|</span>
+            <a href="#" class="link-secondary" onclick="return false;">Mentions Légales</a>
         </div>
 
     </div>
-</div>
+</main>
 
 <script>
     document.getElementById('togglePassword').addEventListener('click', function () {

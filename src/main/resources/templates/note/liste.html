@@ -3,24 +3,23 @@
 <body>
 <div th:fragment="content">
 
-    <div class="page-header">
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
         <div>
-            <h1 class="page-title">Liste des Notes</h1>
-            <p class="page-subtitle">Consultez et gérez les évaluations des étudiants</p>
+            <h1 class="h3 fw-bold mb-1">Liste des Notes</h1><p class="text-app-muted mb-0">Consultez et gérez les évaluations des étudiants</p>
         </div>
-        <a th:href="@{/notes/nouveau}" class="btn btn-primary-custom">
+        <a th:href="@{/notes/nouveau}" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i> Saisir une Note
         </a>
     </div>
 
-    <div class="custom-card">
-        <div class="custom-card-body" th:if="${!#lists.isEmpty(notes)}">
-            <div class="table-count">
+    <div class="card bg-app-panel border-app rounded-4 shadow-app">
+        <div class="card-body p-0" th:if="${!#lists.isEmpty(notes)}">
+            <div class="d-inline-flex align-items-center gap-2 m-4 px-3 py-1 rounded-pill border border-app text-app-muted small">
                 <i class="bi bi-award"></i>
                 <span th:text="${#lists.size(notes)} + ' note(s)'">0 note(s)</span>
             </div>
             <div class="table-responsive">
-                <table class="table table-custom">
+                <table class="table align-middle mb-0">
                     <thead>
                         <tr>
                             <th>Étudiant</th>
@@ -35,18 +34,18 @@
                         <tr th:each="note : ${notes}">
                             <td th:text="${note.inscription.etudiant.prenom + ' ' + note.inscription.etudiant.nom}"></td>
                             <td th:text="${note.inscription.cours.intitule}"></td>
-                            <td><span class="badge-type" th:text="${note.typeEvaluation}"></span></td>
+                            <td><span class="badge text-bg-secondary" th:text="${note.typeEvaluation}"></span></td>
                             <td>
-                                <span class="badge-grade"
-                                      th:classappend="${note.valeur >= 16 ? 'excellent' : (note.valeur >= 12 ? 'good' : (note.valeur >= 10 ? 'average' : 'low'))}"
+                                <span class="badge rounded-pill"
+                                      th:classappend="${note.valeur >= 16 ? 'text-bg-success' : (note.valeur >= 12 ? 'text-bg-info' : (note.valeur >= 10 ? 'text-bg-warning' : 'text-bg-danger'))}"
                                       th:text="${note.valeur}"></span>
                             </td>
                             <td th:text="${note.coefficient}"></td>
-                            <td class="actions-cell">
-                                <a th:href="@{/notes/modifier/{id}(id=${note.id})}" class="btn-action btn-action-edit">
+                            <td class="text-nowrap">
+                                <a th:href="@{/notes/modifier/{id}(id=${note.id})}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-pencil"></i> Modifier
                                 </a>
-                                <a th:href="@{/notes/supprimer/{id}(id=${note.id})}" class="btn-action btn-action-delete" onclick="return confirm('Êtes-vous sûr ?')">
+                                <a th:href="@{/notes/supprimer/{id}(id=${note.id})}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr ?')">
                                     <i class="bi bi-trash"></i> Supprimer
                                 </a>
                             </td>
@@ -55,7 +54,7 @@
                 </table>
             </div>
         </div>
-        <div class="empty-state" th:if="${#lists.isEmpty(notes)}">
+        <div class="text-center text-app-subtle p-5" th:if="${#lists.isEmpty(notes)}">
             <i class="bi bi-award"></i>
             <p>Aucune note trouvée. Commencez par en saisir une.</p>
         </div>
