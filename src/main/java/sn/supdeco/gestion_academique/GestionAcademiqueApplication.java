@@ -8,6 +8,8 @@ public class GestionAcademiqueApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestionAcademiqueApplication.class, args);
+		// Le serveur Tomcat embarqué démarre automatiquement
+		// http://localhost:8080/
 	}
 }
 	
